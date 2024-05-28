@@ -1,0 +1,7 @@
+- Create project
+- Setup branch policies for all repo's
+- Set work item template to DC scrum thing
+- Set security policies
+- Connect team to project
+- Connect group
+- Create wiki
