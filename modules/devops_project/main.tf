@@ -39,6 +39,13 @@ resource "azuredevops_git_permissions" "client_repo_permissions" {
   }
 }
 
+module "project_wiki" {
+  source             = "../devops_wiki"
+  project_name       = var.devops_project_name
+  project_id         = azuredevops_project.project.id
+  project_pages_list = var.devops_project_wiki_pages_list
+}
+
 module "branch_policies" {
   source                                                           = "../devops_project_branch_policy"
   for_each                                                         = var.devops_repository_branch_policy_configuration

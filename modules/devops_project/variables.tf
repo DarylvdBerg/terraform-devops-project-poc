@@ -11,6 +11,12 @@ variable "devops_project_scrum_template" {
   type = string
 }
 
+variable "devops_project_wiki_pages_list" {
+  type = map(object({
+    sub_pages = set(string)
+  }))
+}
+
 variable "devops_project_repository_git_permissions" {
   type = object({
     PullRequestBypassPolicy = string

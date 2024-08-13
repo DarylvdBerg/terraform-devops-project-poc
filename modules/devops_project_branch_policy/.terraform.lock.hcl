@@ -3,7 +3,7 @@
 
 provider "registry.terraform.io/microsoft/azuredevops" {
   version     = "1.2.0"
-  constraints = ">= 1.1.1, >= 1.2.0"
+  constraints = ">= 1.2.0"
   hashes = [
     "h1:Ii6vSxENeIPLd9FCTbvvkV0hZjrbS14ckJqjZfEkNlM=",
     "zh:20169d55adc8dc329e17277cd151d50d0c87d08369e7bcc6d686f1f191352832",
