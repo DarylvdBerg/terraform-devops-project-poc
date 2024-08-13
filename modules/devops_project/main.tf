@@ -11,32 +11,21 @@ resource "azuredevops_project" "project" {
   description        = var.devops_project_description
 }
 
-# Groups
+# Client Group
 resource "azuredevops_group" "project_client_group" {
   scope        = azuredevops_project.project.id
   display_name = "${var.devops_project_name} clients"
   description  = "${var.devops_project_name} client group"
 }
 
-# Permissions
-resource "azuredevops_git_permissions" "default_repository_git_permissions" {
-  project_id  = azuredevops_project.project.id
-  principal   = data.azuredevops_group.contributer_group.id
-  permissions = var.devops_project_repository_git_permissions
-}
-
-resource "azuredevops_project_permissions" "project_client_group_permissions" {
-  project_id  = azuredevops_project.project.id
-  principal   = azuredevops_group.project_client_group.id
-  permissions = var.devops_project_client_group_permissions
-}
-
-resource "azuredevops_git_permissions" "client_repo_permissions" {
+module "project_permissions" {
+  source = "../devops_project_permissions"
   project_id = azuredevops_project.project.id
-  principal  = azuredevops_group.project_client_group.id
-  permissions = {
-    GenericRead = "Deny"
-  }
+  project_contributors_group_id = data.azuredevops_group.contributer_group.id
+  project_client_group_id = azuredevops_group.project_client_group.id
+  devops_project_client_group_permissions = var.devops_project_client_group_permissions
+  devops_project_repository_git_permissions = var.devops_project_repository_git_permissions
+  devops_repository_branch_policy_configuration = var.devops_repository_branch_policy_configuration
 }
 
 module "project_wiki" {

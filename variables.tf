@@ -3,7 +3,7 @@ variable "project_configuration" {
     project_name           = string
     project_description    = string
     project_scrum_template = string
-    project_wiki_list = map(object({
+    project_wiki_pages_list = map(object({
       sub_pages = set(string)
     }))
     project_git_permissions = object({
